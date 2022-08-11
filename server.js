@@ -6,9 +6,11 @@ const PORT = process.env.PORT;
 const app = express();
 
 //MIDDLE WARE
+app.use(express.static('public'));
 app.set('views',__dirname+'/views');
 app.set('view engine','jsx');
 app.engine('jsx',require('express-react-views').createEngine())
+
 
 //ROUTES
 app.get('/',(req,res)=>{
@@ -17,6 +19,11 @@ app.get('/',(req,res)=>{
 //BREADS
 const breadsController = require('./controllers/breads_controller.js')
 app.use('/breads',breadsController);
+
+//error page
+app.get('*',(req,res)=>{
+    res.send('404')
+})
 
 //LISTEN
 app.listen(PORT,()=> {
