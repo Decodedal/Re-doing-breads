@@ -6,6 +6,7 @@ const PORT = process.env.PORT;
 const app = express();
 
 //MIDDLE WARE
+app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.set('views',__dirname+'/views');
 app.set('view engine','jsx');
@@ -22,7 +23,7 @@ app.use('/breads',breadsController);
 
 //error page
 app.get('*',(req,res)=>{
-    res.send('404')
+    res.render('error')
 })
 
 //LISTEN

@@ -6,6 +6,11 @@ const Index = ({breads,title}) =>{
     return(
      <Default title={title}>
         <h2>index page</h2>
+        <div className='newButton'>
+          <a href='breads/new'>
+            <button>New</button>
+          </a>
+        </div>
        <ul>
         { 
         

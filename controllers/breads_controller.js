@@ -11,6 +11,11 @@ breads.get('/',(req,res)=>{
     })
 });
 
+//New must be above show
+breads.get('/new',(req,res)=>{
+    res.render('new');
+})
+
 //SHOW
     breads.get('/:arrayIndex',(req,res)=>{
         // res.send(Bread[req.params.arrayIndex])
@@ -21,6 +26,20 @@ breads.get('/',(req,res)=>{
     }else{
         res.render('error')
     }
+    });
+
+    //create
+    breads.post('/',(req,res)=>{
+       if(!req.body.image){
+        req.body.image = "http://placekitten.com/400/400"
+       }
+        if(req.body.hasGlutten === 'on'){
+            req.body.hasGlutten === 'true';
+        }else{
+            req.body.hasGlutten === 'false'
+        }
+        Bread.push(req.body)
+        res.redirect('/breads')
     })
 
 module.exports = breads;
