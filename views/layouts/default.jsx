@@ -8,6 +8,7 @@ const Default = (html) =>{
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossOrigin="anonymous" />
                 {/* normalize and skeliton links */}
                 <link rel='stylesheet' href='/main.css'/>
+                <link rel='shortcut icon' type='img/jpg' href='https://as2.ftcdn.net/v2/jpg/04/10/47/07/1000_F_410470744_OcFbEYsYnk0u6UBVIhfLyROIbNsCDP2R.jpg'/>
 
             </head>
             <body>
