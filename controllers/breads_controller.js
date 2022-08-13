@@ -16,6 +16,8 @@ breads.get('/new',(req,res)=>{
     res.render('new');
 })
 
+
+
 //SHOW
     breads.get('/:arrayIndex',(req,res)=>{
         // res.send(Bread[req.params.arrayIndex])
@@ -42,6 +44,27 @@ breads.get('/new',(req,res)=>{
         Bread.push(req.body)
         res.redirect('/breads')
     })
+
+   //edit
+   breads.get('/:arrayIndex/edit',(req,res)=>{
+    res.render('edit',{
+        bread :Bread[req.params.arrayIndex],
+        index:req.params.arrayIndex
+
+    })
+}) 
+
+    //update
+    breads.put('/:arrayIndex',(req,res)=>{
+        if(req.body.hasGlutten === 'on'){
+            req.body.hasGlutten === 'true';
+        }else{
+            req.body.hasGlutten === 'false'
+        }
+        Bread[req.params.arrayIndex] = req.body;
+        res.redirect(`/breads/${req.params.arrayIndex}`);
+    });
+
     //DELETE
     breads.delete('/:arrayIndex',(req,res)=>{
         Bread.splice(req.params.arrayIndex, 1);
