@@ -17,7 +17,7 @@ const Index = ({breads,title}) =>{
              breads.map((bread, index)=>{
               return(
                 <li key={index}>
-                    <a href = {`/breads/${index}`}>
+                    <a href = {`/breads/${bread._id}`}>
                     {bread.name}
                     </a>
                     </li>

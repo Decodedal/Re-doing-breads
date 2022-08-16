@@ -4,11 +4,18 @@ const Bread = require('../models/breads')
 
 //INDEX
 breads.get('/',(req,res)=>{
-    // res.send(Bread);
-    res.render('Index',{
-        breads:Bread,
-        title:'Index page'
+    Bread.find()
+    .then(foundBreads=>{
+        res.render('Index',{
+            breads:foundBreads,
+            title:'Index page'
+        })
     })
+    .catch(err=>{
+        res.render('error')
+        console.log(err)
+    })
+   
 });
 
 //New must be above show
@@ -19,29 +26,29 @@ breads.get('/new',(req,res)=>{
 
 
 //SHOW
-    breads.get('/:arrayIndex',(req,res)=>{
+    breads.get('/:id',(req,res)=>{
         // res.send(Bread[req.params.arrayIndex])
-        if(Bread[req.params.arrayIndex]){
-        res.render('show',{
-            bread: Bread[req.params.arrayIndex],
-            index: req.params.arrayIndex
+    Bread.findById(req.params.id)
+         .then(foundBread=>{
+            res.render('show',{
+                bread:foundBread
+            })
+         })
         })
-    }else{
-        res.render('error')
-    }
-    });
+
 
     //create
     breads.post('/',(req,res)=>{
+        console.log(req.body)
        if(!req.body.image){
-        req.body.image = "http://placekitten.com/400/400"
+        req.body.image = undefined
        }
         if(req.body.hasGlutten === 'on'){
             req.body.hasGlutten === 'true';
         }else{
             req.body.hasGlutten === 'false'
         }
-        Bread.push(req.body)
+        Bread.create(req.body)
         res.redirect('/breads')
     })
 
