@@ -18,7 +18,7 @@ const Show = ({bread, index})=>{
             </p>
             <img src={bread.image} alt = {bread.name}/>
             <a href={`/breads/${index}/edit`}><button>edit</button></a>
-            <form action={`/breads/${index}?_method=DELETE`} method="POST">
+            <form action={`/breads/${bread._id}?_method=DELETE`} method="POST">
             <input type = 'submit'value = 'delete'/>
             </form>
         </Default>
