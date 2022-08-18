@@ -40,14 +40,15 @@ breads.get('/new',(req,res)=>{
 
 //SHOW
     breads.get('/:id',(req,res)=>{
-        // res.send(Bread[req.params.arrayIndex])
     Bread.findById(req.params.id)
          .then(foundBread=>{
             res.render('show',{
-                bread:foundBread
+                bread: foundBread
             })
+            })
+            .catch(err=>{console.log(err)})
          })
-        })
+     
 
 
     //create

@@ -19,11 +19,6 @@ function edit({bread}){
                 name='image' 
                 id = 'image'
                 defaultValue={bread.image}/>
-                 <label htmlFor='image'>Image</label>
-                <input
-                type = "text"
-                name='image' 
-                id = 'image'/>
                 <label htmlFor="baker">Baker</label>
                  <select name="baker" id="baker">
                    <option value="Rachel">Rachel</option>
