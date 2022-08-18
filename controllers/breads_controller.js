@@ -1,6 +1,7 @@
 const express = require('express');
 const breads = express.Router();
 const Bread = require('../models/breads')
+const seedValues = require('../database/seed')
 
 //INDEX
 breads.get('/',(req,res)=>{
@@ -17,6 +18,18 @@ breads.get('/',(req,res)=>{
     })
    
 });
+
+//SEED
+breads.get('/data/seed',(req,res)=>{
+    Bread.insertMany(seedValues)
+          .then(seededBreads=>{
+            res.redirect('/breads');
+          })
+          .catch(err=>{
+            console.log(err)
+            res.redirect('error')
+          })
+})
 
 //New must be above show
 breads.get('/new',(req,res)=>{
@@ -39,7 +52,6 @@ breads.get('/new',(req,res)=>{
 
     //create
     breads.post('/',(req,res)=>{
-        console.log(req.body)
        if(!req.body.image){
         req.body.image = undefined
        }
@@ -53,24 +65,30 @@ breads.get('/new',(req,res)=>{
     })
 
    //edit
-   breads.get('/:arrayIndex/edit',(req,res)=>{
-    res.render('edit',{
-        bread :Bread[req.params.arrayIndex],
-        index:req.params.arrayIndex
-
-    })
+   breads.get('/:id/edit',(req,res)=>{
+    Bread.findById(req.params.id)
+         .then(foundBread =>{
+            res.render('edit',{
+                bread: foundBread
+            });
+         })
+         .catch(err=>{console.log(err)})
 }) 
 
     //update
-    breads.put('/:arrayIndex',(req,res)=>{
-        if(req.body.hasGlutten === 'on'){
-            req.body.hasGlutten === 'true';
-        }else{
-            req.body.hasGlutten === 'false'
+    breads.put('/:id', (req, res) => {
+        if(req.body.hasGluten === 'on'){
+          req.body.hasGluten = 'true';
+        } else {
+          req.body.hasGluten = 'false';
         }
-        Bread[req.params.arrayIndex] = req.body;
-        res.redirect(`/breads/${req.params.arrayIndex}`);
-    });
+        Bread.findByIdAndUpdate(req.params.id, req.body, { new: true }) 
+          .then(updatedBread => {
+            console.log(updatedBread) 
+            res.redirect(`/breads/${req.params.id}`) 
+          })
+      })
+      
 
     //DELETE
     breads.delete('/:id',(req,res)=>{
