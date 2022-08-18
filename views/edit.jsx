@@ -20,7 +20,7 @@ function edit({bread}){
                 id = 'image'
                 defaultValue={bread.image}/>
                 <label htmlFor="baker">Baker</label>
-                 <select name="baker" id="baker">
+                 <select name="baker" id="baker" defaultValue={bread.baker}>
                    <option value="Rachel">Rachel</option>
                    <option value="Monica">Monica</option>
                    <option value="Joey">Joey</option>
