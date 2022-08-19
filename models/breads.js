@@ -8,8 +8,8 @@ const breadSchema = new Schema({
   hasGluten: {type: Boolean},
   image: {type:String, default:'https://placekitten.com/500/500'},
   baker:{
-      type:String,
-      enum: ['Rachel','Monica','Chandler','Joey','Ross','Phoebe']
+      type:Schema.Types.ObjectID,
+      ref:'Baker'
   }
 })
 
@@ -19,7 +19,7 @@ breadSchema.methods.getBakedBy = function(){
 }
 //STATIC HELPER
 
-// breadSchema.static.findRachel= function{
+// breadSchema.statics.findRachel= function{
 // return this.find({baker:'Rachel'})
 // }
 
