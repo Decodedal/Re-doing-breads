@@ -9,7 +9,6 @@ baker.get('/',(req,res)=>{
     Baker.find()
          .populate('breads')
          .then(foundBakers=>{
-            console.log(foundBakers)
             res.send(foundBakers)
          })
          .catch(err=>{
@@ -28,6 +27,15 @@ baker.get('/:id',(req,res)=>{
                 baker:foundBaker
             })
          })
+})
+
+//Delete
+baker.delete('/:id',(req,res)=>{
+    Baker.findByIdAndDelete(req.params.id)
+         .then(deleateBaker=>{
+            res.status(303).redirect('/breads')
+         })
+         .catch(err=>{console.log(err)})
 })
 
 //export
