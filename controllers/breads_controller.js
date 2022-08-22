@@ -6,10 +6,13 @@ const Baker = require("../models/baker")
 
 //INDEX
 breads.get('/',(req,res)=>{
+  Baker.find()
+   .then(foundBakers=>{
     Bread.find()
     .then(foundBreads=>{
         res.render('Index',{
             breads:foundBreads,
+            bakers:foundBakers,
             title:'Index page'
         })
     })
@@ -17,7 +20,7 @@ breads.get('/',(req,res)=>{
         res.render('error')
         console.log(err)
     })
-   
+  })
 });
 
 //SEED
