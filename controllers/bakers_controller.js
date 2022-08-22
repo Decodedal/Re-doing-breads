@@ -3,17 +3,31 @@ const express = require('express');
 const baker = express.Router();
 const Baker = require('../models/baker.js');
 const bakerSeedData = require('../models/baker_seed');
-
+const breads = require('./breads_controller.js');
+//index
 baker.get('/',(req,res)=>{
     Baker.find()
          .populate('breads')
          .then(foundBakers=>{
+            console.log(foundBakers)
             res.send(foundBakers)
          })
          .catch(err=>{
             console.log(err)
             res.render('error')
         })
+})
+
+//SHOW
+baker.get('/:id',(req,res)=>{
+    Baker.findById(req.params.id)
+         .populate('breads')
+         .then(foundBaker=>{
+            console.log(foundBaker.name)
+            res.render('bakerShow',{
+                baker:foundBaker
+            })
+         })
 })
 
 //export

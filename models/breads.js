@@ -4,7 +4,7 @@ const{Schema} = mongoose
 
 const breadSchema = new Schema({
   //will write our schema here
-  name : {type: String, required: true},
+  name: {type: String, required: true},
   hasGluten: Boolean,
   image: {type:String, default:'https://placekitten.com/500/500'},
   baker:{
