@@ -5,7 +5,7 @@ const{Schema} = mongoose
 const breadSchema = new Schema({
   //will write our schema here
   name : {type: String, required: true},
-  hasGluten: {type: Boolean},
+  hasGluten: Boolean,
   image: {type:String, default:'https://placekitten.com/500/500'},
   baker:{
       type:Schema.Types.ObjectID,
@@ -15,7 +15,7 @@ const breadSchema = new Schema({
 
 //helper method 
 breadSchema.methods.getBakedBy = function(){
-  return `${this.name} was baked with love by ${this.baker}`;
+  return `${this.name} was baked with love by ${this.baker.name}, who has been with us since ${this.baker.startDate.getFullYear()}`;
 }
 //STATIC HELPER
 

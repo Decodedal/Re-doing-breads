@@ -18,7 +18,6 @@ const Show = ({bread})=>{
             </p>
             <img src={bread.image} alt = {bread.name}/>
             <p>{bread.getBakedBy()}</p>
-             <p>Baked by {bread.baker}</p>
             <a href={`/breads/${bread._id}/edit`}><button>edit</button></a>
             <form action={`/breads/${bread._id}?_method=DELETE`} method="POST">
             <input type = 'submit'value = 'delete'/>

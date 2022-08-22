@@ -2,6 +2,7 @@ const express = require('express');
 const breads = express.Router();
 const Bread = require('../models/breads')
 const seedValues = require('../database/seed')
+const Baker = require("../models/baker")
 
 //INDEX
 breads.get('/',(req,res)=>{
@@ -33,14 +34,20 @@ breads.get('/data/seed',(req,res)=>{
 
 //New must be above show
 breads.get('/new',(req,res)=>{
-    res.render('new');
+    Baker.find()
+         .then(foundBakers =>{
+              res.render('new',{
+                bakers: foundBakers
+              })
+         })
 })
 
 
 
 //SHOW
     breads.get('/:id',(req,res)=>{
-    Bread.findById(req.params.id)
+      Bread.findById(req.params.id)
+         .populate('baker')
          .then(foundBread=>{
             res.render('show',{
                 bread: foundBread
@@ -67,12 +74,16 @@ breads.get('/new',(req,res)=>{
 
    //edit
    breads.get('/:id/edit',(req,res)=>{
+    Baker.find()
+         .then(foundBakers =>{
     Bread.findById(req.params.id)
          .then(foundBread =>{
             res.render('edit',{
-                bread: foundBread
+                bread: foundBread,
+                bakers: foundBakers
             });
          })
+        })
          .catch(err=>{console.log(err)})
 }) 
 
