@@ -20,7 +20,10 @@ baker.get('/',(req,res)=>{
 //SHOW
 baker.get('/:id',(req,res)=>{
     Baker.findById(req.params.id)
-         .populate('breads')
+         .populate({
+            path:'breads',
+            options:{limit:2}
+         })
          .then(foundBaker=>{
             console.log(foundBaker.name)
             res.render('bakerShow',{

@@ -5,23 +5,19 @@ const seedValues = require('../database/seed')
 const Baker = require("../models/baker")
 
 //INDEX
-breads.get('/',(req,res)=>{
-  Baker.find()
-   .then(foundBakers=>{
-    Bread.find()
-    .then(foundBreads=>{
+breads.get('/', async(req,res)=>{
+ try{
+ const foundBakers = await Baker.find().lean()
+ const foundBreads = await Bread.find().limit(5).lean()
         res.render('Index',{
             breads:foundBreads,
             bakers:foundBakers,
             title:'Index page'
         })
-    })
-    .catch(err=>{
-        res.render('error')
-        console.log(err)
-    })
-  })
-});
+      }catch(e){
+      res.status(404).render('error')
+      }
+  });
 
 //SEED
 breads.get('/data/seed',(req,res)=>{
