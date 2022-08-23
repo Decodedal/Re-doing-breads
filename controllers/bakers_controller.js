@@ -25,7 +25,6 @@ baker.get('/:id',(req,res)=>{
             options:{limit:2}
          })
          .then(foundBaker=>{
-            console.log(foundBaker.name)
             res.render('bakerShow',{
                 baker:foundBaker
             })

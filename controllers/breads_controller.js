@@ -8,7 +8,7 @@ const Baker = require("../models/baker")
 breads.get('/', async(req,res)=>{
  try{
  const foundBakers = await Baker.find().lean()
- const foundBreads = await Bread.find().limit(5).lean()
+ const foundBreads = await Bread.find().lean()
         res.render('Index',{
             breads:foundBreads,
             bakers:foundBakers,
@@ -35,6 +35,7 @@ breads.get('/data/seed',(req,res)=>{
 breads.get('/new',(req,res)=>{
     Baker.find()
          .then(foundBakers =>{
+          console.log(foundBakers)
               res.render('new',{
                 bakers: foundBakers
               })
@@ -63,9 +64,9 @@ breads.get('/new',(req,res)=>{
         req.body.image = undefined
        }
         if(req.body.hasGlutten === 'on'){
-            req.body.hasGlutten === 'true';
+            req.body.hasGluten = 'true';
         }else{
-            req.body.hasGlutten === 'false'
+            req.body.hasGluten = 'false';
         }
         Bread.create(req.body)
         res.redirect('/breads')
@@ -88,10 +89,11 @@ breads.get('/new',(req,res)=>{
 
     //update
     breads.put('/:id', (req, res) => {
-        if(req.body.hasGluten === 'on'){
-          req.body.hasGluten = 'true';
+        console.log(req.body)
+        if(req.body.hasGluten == 'on'){
+          req.body.hasGluten = true;
         } else {
-          req.body.hasGluten = 'false';
+          req.body.hasGluten = false;
         }
         Bread.findByIdAndUpdate(req.params.id, req.body, { new: true }) 
           .then(updatedBread => {

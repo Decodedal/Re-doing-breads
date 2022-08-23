@@ -8,7 +8,7 @@ const breadSchema = new Schema({
   hasGluten: Boolean,
   image: {type:String, default:'https://placekitten.com/500/500'},
   baker:{
-      type:Schema.Types.ObjectID,
+      type:Schema.Types.ObjectId,
       ref:'Baker'
   }
 })
